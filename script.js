@@ -104,9 +104,4 @@ async function fetchData() {
 
 
 }
-document.getElementById('demo1').addEventListener("change",handleChange)
-function handleChange(){
-console.log(document.getElementById('demo1').value);
-document.getElementById('demo1').innerHTML="<option name='12312'>sdfsdf</option>"
-}
 fetchData();

@@ -1,12 +1,30 @@
 async function fetchData() {
-    const res = await fetch("https://api.aladhan.com/v1/timingsByCity/26-03-2023?city=Ankara&country=Turkey&method=13");
+    var date = new Date();
+
+    const formatdate = formatDate(date);
+
+    const citySelect = localStorage.getItem("selectedCity");
+    const stateSelect = localStorage.getItem("selectedState");
+
+
+    const res = await fetch("https://namaz-vakti.vercel.app/api/timesFromPlace?country=Turkey&region=" + citySelect + "&city=" + stateSelect + "&date=" + formatdate + "&days=1&timezoneOffset=180");
     const record = await res.json();
 
-    const getTimeAksam = record.data.timings.Maghrib;
+    const prayerTimes = record.times[formatdate];
+    const getTimeAksam = prayerTimes[4];
+
     const getTimeHoursAksam = getTimeAksam.toString().slice(0, 2);
     const getTimeMinutesAksam = getTimeAksam.toString().slice(3, 5);
 
-    const timeAksam = new Date(record.data.date.gregorian.year, record.data.date.gregorian.month.number - 1, record.data.date.gregorian.day, getTimeHoursAksam, (parseInt(getTimeMinutesAksam) + 6), "59").getTime();
+    const timeAksam = new Date(date.getFullYear().toString(), date.getMonth().toString(), date.getDay().toString(), getTimeHoursAksam, getTimeMinutesAksam, "59").getTime();
+
+    const getTimeSabah = prayerTimes[0];
+
+    const getTimeHoursSabah = getTimeSabah.toString().slice(0, 2);
+    const getTimeMinutesSabah = getTimeSabah.toString().slice(3, 5);
+
+    const timeSabah = new Date(date.getFullYear().toString(), date.getMonth().toString(), date.getDay().toString(), getTimeHoursSabah, getTimeMinutesSabah, "59").getTime();
+
 
     var x = setInterval(function () {
 
@@ -14,7 +32,12 @@ async function fetchData() {
         var now = new Date().getTime();
 
         // Find the distance between now and the count down date
-        var distance = timeAksam - now;
+        if (now > timeAksam) {
+            var distance = timeSabah - now;
+        }
+        else {
+            var distance = timeAksam - now;
+        }
 
         // Time calculations for days, hours, minutes and seconds
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -52,6 +75,20 @@ async function fetchData() {
 
 
 }
-
-
 fetchData();
+
+
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}

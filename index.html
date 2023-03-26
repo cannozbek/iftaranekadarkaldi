@@ -30,12 +30,21 @@
         position: relative;
       }
 
-      input {
+      select,
+      button {
         position: absolute;
-        top: 20px;
+        top: 60px;
         right: 11%;
         width: 80%;
         left: 11%;
+        color: black;
+        background-color: white;
+      }
+      #state {
+        top: 110px;
+      }
+      #devamEt {
+        top: 160px;
         color: black;
       }
     </style>
@@ -49,11 +58,13 @@
   <body style="width: 413px; height: 295px">
     <img src="/img/bg3.png" width="100%" height="100%" />
 
-    <input id="searchbar" onkeyup="search_animal()" type="text" name="search" />
-
-    <ul id="list-holder"></ul>
+    <select id="city">
+      <option value="">Şehir Seç...</option>
+    </select>
+    <select id="state">
+      <option value="">İlçe Seç...</option>
+    </select>
+    <button id="devamEt">Devam Et</button>
   </body>
   <script src="index.js"></script>
-
-  <script src="script.js"></script>
 </html>

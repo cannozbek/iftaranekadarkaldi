@@ -6,7 +6,7 @@
         font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
           sans-serif;
       }
-      ul {
+      p {
         position: absolute;
         text-align: center;
         font-size: 60px;
@@ -32,10 +32,10 @@
 
       input {
         position: absolute;
-        top: 20px;
-        right: 11%;
-        width: 80%;
-        left: 11%;
+        top: 10px;
+        right: 65%;
+        width: auto;
+        left: 10%;
         color: black;
       }
     </style>
@@ -49,11 +49,19 @@
   <body style="width: 413px; height: 295px">
     <img src="/img/bg3.png" width="100%" height="100%" />
 
-    <input id="searchbar" onkeyup="search_animal()" type="text" name="search" />
-
-    <ul id="list-holder"></ul>
+    <p id="demo"></p>
   </body>
-  <script src="index.js"></script>
+
+  <div class="form-container">
+    <form class="form">
+      <input id="search" type="text" class="input" placeholder="search..." />
+      <button id="clear" class="clear-results">clear</button>
+    </form>
+  </div>
+  <div class="results-container">
+    <ul class="results-list" id="list"></ul>
+  </div>
 
   <script src="script.js"></script>
+  <script src="index.js"></script>
 </html>

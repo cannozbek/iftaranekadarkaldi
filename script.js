@@ -24,6 +24,7 @@ async function fetchData() {
     const getTimeMinutesSabah = getTimeSabah.toString().slice(3, 5);
 
     const timeSabah = new Date(date.getFullYear().toString(), date.getMonth().toString(), date.getDay().toString(), getTimeHoursSabah, getTimeMinutesSabah, "59").getTime();
+    console.log(timeSabah);
 
 
     var x = setInterval(function () {

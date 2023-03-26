@@ -1,0 +1,11 @@
+{
+  "name": "İftara Ne Kadar Kaldı ?",
+  "version": "1.0.0",
+  "description": "İftara ve sahura kalan zamanı gösterir.",
+  "manifest_version": 3,
+  "author": "Remzi Can Özbek",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "İftara Ne Kadar Kaldi"
+  }
+}
